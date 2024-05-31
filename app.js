@@ -5,7 +5,7 @@ let getNews = (search, page) => {
 .then((res) => res.json())
 .then((res) =>{
     let news = document.getElementById("news");
-    const articles = res.articles;
+    const articles = res.news;
     for(var i=0;i<articles.length;i++){
         const {image,title,text,publish_date} = articles[i];
         news.innerHTML +=`
