@@ -1,24 +1,20 @@
 let getNews = (search, page) => {
 
-    fetch(`https://api.newscatcherapi.com/v2/search?q=${search}&page_size=12&page=${page ? page:1}`, {
-        headers:{
-        'x-api-key': 'SklMI4aMdsY80EaHqraFei9ZCO-n9wIHQMKM07lx8gU'
-    } 
-})
+    fetch(`https://api.worldnewsapi.com/search-news?api-key=32b24aa92d5845aabe43cadf3ae6b301&text=${search}&offset=${page ? page : 0}&number=12`)
 
 .then((res) => res.json())
 .then((res) =>{
     let news = document.getElementById("news");
     const articles = res.articles;
     for(var i=0;i<articles.length;i++){
-        const {media,title,summary,published_date} = articles[i];
+        const {image,title,text,publish_date} = articles[i];
         news.innerHTML +=`
         <div class="card mt-3" style="width: 18rem;">
-            <img src=${media} class=" image-card card-img-top" alt="...">
+            <img src=${image} class=" image-card card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">${title.slice(0,20)}...</h5>
-              <p class="card-text">${summary.slice(0,50)}...</p>
-              <span class="badge text-bg-primary">${moment(published_date).fromNow()}</span>
+              <p class="card-text">${text.slice(0,50)}...</p>
+              <span class="badge text-bg-primary">${moment(publish_date).fromNow()}</span>
             </div>
             </div> `
     }
